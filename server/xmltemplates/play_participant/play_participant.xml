@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="freeswitch/xml">
+    <section name="dialplan" description="RE Dial Plan For FreeSwitch">
+        <context name="default">
+            <extension name="test9">
+                <condition field="destination_number" expression="^(.*)$">
+                    <action application="bind_digit_action" data="my_digits,*,exec:execute_extension,repeating XML default"/>
+                    <action application="bind_digit_action" data="my_digits,#,exec:execute_extension,back_to_conference XML default"/>
+                    <action application="bind_digit_action" data="my_digits,0,exec:execute_extension,play_desc_of_partipant XML default"/>
+                    <action application="digit_action_set_realm" data="my_digits"/>
+                    <action application="playback" data="/record_path/xxx.mp3"/>
+                    <action application="say" data="en number pronounced unique code."/>
+                    <action application="transfer" data="route_to_conference_room"/> 
+                </condition>
+            </extension>
+        </context>
+    </section>
+</document>

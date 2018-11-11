@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="freeswitch/xml">
+    <section name="dialplan" description="RE Dial Plan For FreeSwitch">
+        <context name="public">
+            <extension name="test9">
+                <condition field="destination_number" expression="^(.*)$">
+                    <action application="playback" data="/usr/happyhour_media/entering_room.mp3"/>
+                    <action application="bind_digit_action" data="my_digits,#,exec:execute_extension,play_participant XML default"/>
+                    <action application="bind_digit_action" data="my_digits,*,exec:execute_extension,join_another_room XML default"/>
+                    <action application="digit_action_set_realm" data="my_digits"/>
+                    <action application="set" data="res=${sched_api +1 none conference girl_or_guy_room_num play /base-dir/generated/uuid_announce.wav}"/>
+                    <action application="conference" data="girl_or_guy_room_num"/> 
+                </condition>
+            </extension>
+        </context>
+    </section>
+</document>

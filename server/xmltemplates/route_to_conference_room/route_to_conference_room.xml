@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="freeswitch/xml">
+    <section name="dialplan" description="RE Dial Plan For FreeSwitch">
+        <context name="public">
+            <extension name="test9">
+                <condition field="destination_number" expression="^(.*)$">
+
+                    <action application="bind_digit_action" data="my_digits,#,exec:execute_extension,play_participant XML default"/>
+                    <action application="bind_digit_action" data="my_digits,*,exec:execute_extension,join_another_room XML default"/>
+
+                    <action application="digit_action_set_realm" data="my_digits"/>
+
+                    <action application="conference" data="1_3"/> 
+                </condition>
+            </extension>
+        </context>
+    </section>
+</document>

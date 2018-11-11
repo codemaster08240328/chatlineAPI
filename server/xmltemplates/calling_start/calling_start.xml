@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="freeswitch/xml">
+	<section name="dialplan" description="Happy Hour Chatline">
+		<context name="public">
+			<extension name="call_starting">
+				<condition field="destination_number" expression="^(.*)$">
+					<action application="playback" data="/base_path/happyhour_intro.mp3"/>
+					<action application="playback" data="/base_path/record_name.mp3"/>
+					<action application="set" data="playback_terminators=#"/> 
+					<action application="record" data="/usr/record/__some_call_uuid_name.wav 20 200"/>
+					<action application="playback" data="/base_path/record_desc.mp3"/>
+					<action application="set" data="playback_terminators=#"/> 
+					<action application="record" data="/usr/record/__some_call_uuid_desc.wav 60 200"/>
+					<action application="play_and_get_digits" data="1 1 3 7000 # /base_path/girl_vs_guy.mp3 /base_path/girl_vs_guy.mp3 girl_or_guy \d+"/>
+					<action application="play_and_get_digits" data="1 1 3 7000 # /base_path/select_room.mp3 /base_path/select_room.mp3 room_num \d+"/>
+					<action application="playback" data="/base_path/you_are_now.mp3"/>
+					<action application="say" data="en number pronounced unique_code"/>
+					<action application="transfer" data="enter_conference_root" />
+				</condition>
+		</extension>
+		</context>
+	</section>
+</document>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="freeswitch/xml">
+  <section name="dialplan" description="RE Dial Plan For FreeSwitch">
+    <context name="default">
+      <extension name="test9">
+        <condition field="destination_number" expression="^(.*)$">
+          <action application="playback" data="/<base-dir>/intro.mp3"/>
+            <action application="playback" data="/<base-dir>/record_name.mp3"/>
+            <action application="record" data="/<base-dir>/record/<uuid>_<caller_id>_name.wav"/>
+            <action application="playback" data="/<base-dir>/tell_about_yourselves.mp3"/>
+            <action application="record" data="/<base-dir>/record/<uuid>_<caller_id>_desc.wav"/>
+            <action application="play_and_get_digits" data="1 1 3 7000 # /<base-dir>/girl_vs_guy.mp3 /<base-dir>/girl_vs_guy.mp3”p3 girl_or_guy \d+"/>
+            <action application="play_and_get_digits" data="1 1 3 7000 # /<base-dir>/select_room.mp3 /<base-dir>/select_room.mp3 room_num \d+"/>
+            <action application="playback" data="you_are_now.mp3"/>
+            <action application="say" data="en number pronounced unique code."/>
+
+        </condition>
+      </extension>
+    </context>
+  </section>
+</document>

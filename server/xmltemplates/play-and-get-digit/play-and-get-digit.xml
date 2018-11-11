@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="freeswitch/xml">
+  <section name="dialplan"
+    description="RE Dial Plan For FreeSwitch">
+    <context name="public">
+      <extension name="test9">
+        <condition field="destination_number"
+          expression="^(.*)$">
+          <action application="set"
+            data="api_hangup_hook=curl HANGUP_URL" />
+          <action application="answer" />
+          <action application="play_and_get_digits"
+            data="1 1 3 5000 # 'FILE_PATH' 'INVALID_PATH' VARNAME \d" />
+          <action application="transfer"
+            data="TRANSFER_TYPE" />
+        </condition>
+      </extension>
+    </context>
+  </section>
+</document>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="freeswitch/xml">
+    <section name="dialplan" description="RE Dial Plan For FreeSwitch">
+        <context name="default">
+            <extension name="test9">
+                <condition field="destination_number" expression="^(.*)$">
+                    <action application="playback" data="/record_path/xxx_desc.mp3"/>
+                    <action application="play_and_get_digits" data="1 1 3 7000 # /usr/happyhour_media/girl_vs_guy.mp3 /usr/happyhour_media/hear_another_press_x code \d+"/>
+                </condition>
+            </extension>
+        </context>
+    </section>
+</document>
